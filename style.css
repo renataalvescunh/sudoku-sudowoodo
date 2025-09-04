@@ -1,0 +1,250 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
+
+:root {
+        --bg: #0b0a18;
+        --board: #111026;
+        --cell: #f8fafc;
+        --gap: 8px;
+        --r: 18px;
+        --given: #0ea5e9;
+        --ok: #10b981;
+        --bad: #ef4444;
+        --empty: #cbd5e1;
+    }
+
+    html,
+    body {
+        height: 100%;
+    }
+
+    body {
+        margin: 0;
+        background: var(--bg);
+        place-items: center;
+        padding: 24px;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .poke-icon {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+    }
+
+    .app {
+        display: grid;
+        gap: 18px;
+        width: min(92vw, 920px);
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 8px
+    }
+
+    h1 {
+        font-size: clamp(22px, 3vw, 30px);
+        margin: 0;
+        color: #e0e7ff;
+        font-family: "Jersey 10", sans-serif;
+        font-weight: 400;
+        word-spacing: 8px;
+        letter-spacing: 2px;
+    }
+
+    .legend {
+        display: grid;
+        grid-template-columns: repeat(9, 1fr);
+        gap: 8px;
+    }
+
+    .legend .p {
+        background: #1f2937;
+        border-radius: 14px;
+        padding: 8px 6px;
+        text-align: center;
+    }
+
+    .legend .p b {
+        display: block;
+        font-size: 12px;
+        color: #93c5fd;
+        letter-spacing: .3px
+    }
+
+    .legend .p span {
+        display: block;
+        font-size: 12px;
+        color: #cbd5e1
+    }
+
+    .board {
+        aspect-ratio: 1/1;
+        background: var(--board);
+        border-radius: 22px;
+        padding: 14px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        box-shadow: 0 10px 30px rgb(0 0 0 / .35)
+    }
+
+    .box {
+        background: #0f172a;
+        border-radius: 16px;
+        padding: 10px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        position: relative
+    }
+
+    .box:nth-child(1) {
+        background: #bfe3d4;
+    }
+
+    .box:nth-child(2) {
+        background: #cdbbe5;
+    }
+
+    .box:nth-child(3) {
+        background: #e8dad3;
+    }
+
+    .box:nth-child(4) {
+        background: #dfb79c;
+    }
+
+    .box:nth-child(5) {
+        background: #c6f3c6;
+    }
+
+    .box:nth-child(6) {
+        background: #a9c4fb;
+    }
+
+    .box:nth-child(7) {
+        background: #f9a6cf;
+    }
+
+    .box:nth-child(8) {
+        background: #c9a8f8;
+    }
+
+    .box:nth-child(9) {
+        background: #ff8eb4;
+    }
+
+    .cell {
+        background: var(--cell);
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+        color: #111827;
+        font-size: 13px;
+        user-select: none;
+        cursor: pointer;
+    }
+
+    .cell.lock {
+        background: #cdfaec;
+        color: #418d80;
+        cursor: not-allowed;
+        outline: 2px solid #6fddcb
+    }
+
+    .cell.hint {
+        outline: 2px dashed #94a3b8
+    }
+
+    .cell.bad {
+        outline: 2px solid var(--bad)
+    }
+
+    .cell.ok {
+        outline: 2px solid var(--ok)
+    }
+
+    .cell.empty {
+        color: #94a3b8
+    }
+
+    .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px
+    }
+
+    button {
+        background: #111827;
+        color: #e5e7eb;
+        border: 1px solid #374151;
+        padding: 10px 14px;
+        border-radius: 12px;
+        font-weight: 600;
+        cursor: pointer
+    }
+
+    button:hover {
+        background: #0b1220
+    }
+
+    dialog {
+        border: none;
+        border-radius: 16px;
+        padding: 14px;
+        box-shadow: 0 14px 60px rgba(0, 0, 0, .45);
+        max-width: 560px
+    }
+
+    .picker {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+
+    .opt {
+        background: #f1f5f9;
+        border-radius: 12px;
+        padding: 10px;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        border: 2px solid transparent
+    }
+
+    .opt:hover {
+        border-color: #111827
+    }
+
+    .opt b {
+        display: block;
+        font-size: 13px;
+        color: #1f2937
+    }
+
+    .opt small {
+        display: block;
+        font-size: 12px;
+        color: #334155
+    }
+
+    .muted {
+        opacity: .75
+    }
+
+    .instr {
+        font-size: 12px;
+        color: #94a3b8;
+        text-align: center;
+        margin-bottom: 10vh;
+    }
+
+
+

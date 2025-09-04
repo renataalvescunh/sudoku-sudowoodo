@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sudoku Pokémon 9x9 – por Gerações </title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/png" href="assets/2Sudowoodo.png" />
+    <meta name="description" content="Jogue Sudoku com Pokémon das Gerações 1 a 9! Divirta-se com este quebra-cabeça temático." />
+    <meta name="keywords" content="Sudoku, Pokémon, Gerações, Quebra-cabeça, Jogo, Divertido, Desafio, Lógica" />
+</head>
+<body>
+    <div class="app">
+        <header>
+            <h1>Sudoku Pokémon – Gerações 1–9</h1>
+            <div class="toolbar">
+                <button id="toggleLabel">Mostrar: Nomes</button>
+                <button id="check">Verificar</button>
+                <button id="solve">Revelar solução</button>
+                <button id="clear">Limpar jogadas</button>
+            </div>
+        </header>
+
+        <!-- Legenda (1–9 mapeados para seus Pokémon) -->
+        <div class="legend" id="legend"></div>
+
+        <!-- Tabuleiro 9x9 (3x3 caixas) -->
+        <div class="board" id="board"></div>
+
+        <div class="instr">
+            Toque em uma célula vazia para escolher um Pokémon. As células azuis são pistas fixas.
+        </div>
+    </div>
+
+    <!-- Modal de escolha -->
+    <dialog id="modal">
+        <div class="picker" id="picker"></div>
+    </dialog>
+
+<script src="script.js" defer></script>
+
+</body>
+
+</html>
