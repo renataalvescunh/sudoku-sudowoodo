@@ -4,47 +4,47 @@ const POKEMAP = [null,
         name: 'Pikachu',
         gen: 1,
         img: 'assets/1Pikachu.png'
-    }, // 1
+    },
     {
         name: 'Sudowoodo',
         gen: 2,
         img: 'assets/2Sudowoodo.png'
-    }, // 2
+    },
     {
         name: 'Milotic',
         gen: 3,
         img: 'assets/3Milotic.png'
-    }, // 3
+    },
     {
         name: 'Weavile',
         gen: 4,
         img: 'assets/4Weavile.png'
-    }, // 4
+    },
     {
         name: 'Chandelure',
         gen: 5,
         img: 'assets/5Chandelure.png'
-    }, // 5
+    },
     {
         name: 'Skiddo',
         gen: 6,
         img: 'assets/6Skiddo.png'
-    }, // 6
+    },
     {
         name: 'Litten',
         gen: 7,
         img: 'assets/7Litten.png'
-    }, // 7
+    },
     {
         name: 'Applin',
         gen: 8,
         img: 'assets/8Applin.png'
-    }, // 8
+    },
     {
         name: 'Tinkaton',
         gen: 9,
         img: 'assets/9Tinkaton.png'
-    }, // 9
+    },
 ];
 
 // =================== SOLUÇÃO BASE ===================
@@ -76,8 +76,6 @@ const PUZZLE = [
 // =================== ELEMENTOS ===================
 const board = document.getElementById('board');
 const legend = document.getElementById('legend');
-const modal = document.getElementById('modal');
-const picker = document.getElementById('picker');
 const toggleBtn = document.getElementById('toggleLabel');
 const checkBtn = document.getElementById('check');
 const solveBtn = document.getElementById('solve');
@@ -125,21 +123,6 @@ POKEMAP.slice(1).forEach((p, i) => {
     legend.appendChild(d);
 });
 
-// =================== PALETA ===================
-for (let n = 1; n <= 9; n++) {
-    const o = document.createElement('div');
-    o.className = 'opt';
-    o.innerHTML = `<img src="${POKEMAP[n].img}" class="poke-icon"><br><small>${POKEMAP[n].name}</small>`;
-    o.addEventListener('click', () => {
-        if (!selectedCell) return;
-        selectedCell.dataset.val = n;
-        renderCell(selectedCell, n);
-        selectedCell.classList.remove('empty', 'bad', 'ok');
-        modal.close();
-    });
-    picker.appendChild(o);
-}
-
 // =================== TABULEIRO ===================
 for (let br = 0; br < 3; br++) {
     for (let bc = 0; bc < 3; bc++) {
@@ -147,8 +130,8 @@ for (let br = 0; br < 3; br++) {
         box.className = 'box';
         for (let r = 0; r < 3; r++) {
             for (let c = 0; c < 3; c++) {
-                const R = br * 3 + r,
-                    C = bc * 3 + c;
+                const R = br * 3 + r;
+                const C = bc * 3 + c;
                 const val = PUZZLE[R][C];
                 const cell = document.createElement('div');
                 cell.className = 'cell';
@@ -160,8 +143,9 @@ for (let br = 0; br < 3; br++) {
                     cell.classList.add('empty');
                     cell.dataset.val = 0;
                     cell.addEventListener('click', () => {
+                        if (selectedCell) selectedCell.classList.remove('selected');
                         selectedCell = cell;
-                        modal.showModal();
+                        cell.classList.add('selected');
                     });
                 }
                 box.appendChild(cell);
@@ -173,11 +157,28 @@ for (let br = 0; br < 3; br++) {
 
 // =================== EVENTOS ===================
 
+// Captura digitação do usuário
+document.addEventListener('keydown', (e) => {
+    if (!selectedCell || selectedCell.classList.contains('lock')) return;
+
+    const n = parseInt(e.key);
+    if (n >= 1 && n <= 9) {
+        selectedCell.dataset.val = n;
+        renderCell(selectedCell, n);
+        selectedCell.classList.remove('empty', 'bad', 'ok');
+    }
+
+    if (e.key === 'Backspace' || e.key === 'Delete') {
+        selectedCell.dataset.val = 0;
+        renderCell(selectedCell, 0);
+        selectedCell.classList.add('empty');
+        selectedCell.classList.remove('bad', 'ok');
+    }
+});
+
 // Alternar exibição
 toggleBtn.addEventListener('click', () => {
-    if (displayMode === "sprite") displayMode = "name";
-    else if (displayMode === "name") displayMode = "number";
-    else displayMode = "sprite";
+    displayMode = displayMode === "sprite" ? "name" : displayMode === "name" ? "number" : "sprite";
     refreshLabels();
 });
 
@@ -213,12 +214,12 @@ solveBtn.addEventListener('click', () => {
 
 // Limpar
 clearBtn.addEventListener('click', () => {
-    document.querySelectorAll('.cell').forEach((el, i) => {
+    document.querySelectorAll('.cell').forEach((el) => {
         if (!el.classList.contains('lock')) {
             el.dataset.val = 0;
             renderCell(el, 0);
             el.classList.add('empty');
-            el.classList.remove('bad', 'ok');
+            el.classList.remove('bad', 'ok', 'selected');
         }
     });
 });

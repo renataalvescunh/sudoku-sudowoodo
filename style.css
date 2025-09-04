@@ -57,6 +57,14 @@
         letter-spacing: 2px;
     }
 
+
+    .instr-1 {
+        font-size: 12px;
+        color: #94a3b8;
+        text-align: center;
+        margin-bottom: 0px;
+    }
+
     .legend {
         display: grid;
         grid-template-columns: repeat(9, 1fr);
@@ -246,5 +254,11 @@
         margin-bottom: 10vh;
     }
 
+    .cell.selected {
 
+        outline: 2px solid #94a8c0;
+        background: #dbe1e6;
+        color: #3730a3;
+
+    }
 
