@@ -209,6 +209,10 @@ document.addEventListener('keydown', (e) => {
         selectedCell.dataset.val = n;
         renderCell(selectedCell, n);
         selectedCell.classList.remove('empty', 'bad', 'ok');
+
+        // Tocar som
+        sound.currentTime = 0;
+        sound.play();
     }
 
     if (e.key === 'Backspace' || e.key === 'Delete') {
@@ -216,8 +220,13 @@ document.addEventListener('keydown', (e) => {
         renderCell(selectedCell, 0);
         selectedCell.classList.add('empty');
         selectedCell.classList.remove('bad', 'ok');
+
+        // Tocar som ao apagar
+        sound.currentTime = 0;
+        sound.play();
     }
 });
+
 
 // Alternar exibição
 toggleBtn.addEventListener('click', () => {
@@ -228,19 +237,31 @@ toggleBtn.addEventListener('click', () => {
 // Verificar
 checkBtn.addEventListener('click', () => {
     const cells = [...document.querySelectorAll('.cell')];
-    let okAll = true;
+    let allCorrect = true;
+    let allFilled = true;
+
     cells.forEach((el, i) => {
-        const r = Math.floor(i / 9),
-            c = i % 9;
+        const r = Math.floor(i / 9);
+        const c = i % 9;
         const v = +el.dataset.val;
+
+        if (v === 0) {
+            allFilled = false; // achou célula vazia
+            return;
+        }
+
         const good = (v === SOL[r][c]);
         if (!el.classList.contains('lock')) {
-            el.classList.toggle('ok', good && v !== 0);
-            el.classList.toggle('bad', !good && v !== 0);
-            if (!good && v !== 0) okAll = false;
+            el.classList.toggle('ok', good);
+            el.classList.toggle('bad', !good);
+            if (!good) allCorrect = false;
         }
     });
-    if (okAll) alert('Perfeito! Você completou corretamente as jogadas marcadas.');
+
+    // Só exibe alerta se todas as células estiverem preenchidas e corretas
+    if (allFilled && allCorrect) {
+        alert('Perfeito! Você completou corretamente o tabuleiro.');
+    }
 });
 
 // Resolver
@@ -288,9 +309,17 @@ lightModeBtn.addEventListener('click', () => {
 lightModeBtn.textContent = 'Modo claro'; // estado inicial
 
 
-// =================== AJUDA ===================
-const helpBtn = document.getElementById('help');
-helpBtn.addEventListener('click', () => {
-    alert("Instruções:\n\n1. Complete o tabuleiro 9x9 com Pokémon das Gerações 1 a 9, garantindo que cada linha, coluna e caixa 3x3 contenha todos os Pokémon sem repetições.\n\n2. Clique em uma célula vazia e digite um número de 1 a 9 para inserir o Pokémon correspondente. Use Backspace ou Delete para limpar a célula.\n\n3. Use os botões para verificar suas jogadas, revelar a solução, limpar suas jogadas ou iniciar um novo jogo.\n\n4. Alterne entre exibir sprites, nomes ou números dos Pokémon usando o botão 'Mostrar'.\n\n5. Ative o modo claro ou escuro conforme sua preferência.\n\nDivirta-se jogando Sudoku-sudowoodo!");
+
+// =================== SOM DE CLIQUE NOS BOTÕES ===================
+const buttons = document.querySelectorAll('.playButton');
+const sound = document.getElementById('clickSound');
+
+buttons.forEach(button => {
+    button.addEventListener('click', () => {
+        sound.currentTime = 0; // reinicia o som se clicar várias vezes
+        sound.play();
+    });
 });
-// =================== FIM DO CÓDIGO ===================
+
+
+

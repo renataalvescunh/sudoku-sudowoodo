@@ -13,21 +13,17 @@
     <div class="app">
         <header>
             <h1> Sudoku-sudowoodo </h1>
-            <div class="instr-1">
-                Complete o tabuleiro 9x9 com Pokémon das Gerações 1 a 9, garantindo que cada linha, coluna e caixa 3x3 contenha todos os Pokémon sem repetições. Boa sorte!
-
-            </div>
+      
             <div class="toolbar">
-                <button id="toggleLabel">Mostrar: Nomes</button>
-                <button id="check">Verificar</button>
-                <button id="solve">Revelar solução</button>
-                <button id="clear">Limpar jogadas</button>
-                <button id="newGame">Novo jogo</button>
-                <button id="lightMode">Modo claro</button>
-                <button id="help">?</button>
-
-
+                <button id="toggleLabel" class="playButton"> Mudar modo de visualização </button>
+                <button id="check" class="playButton">Verificar</button>
+                <button id="solve" class="playButton">Revelar solução</button>
+                <button id="clear" class="playButton">Limpar jogadas</button>
+                <button id="newGame" class="playButton">Novo jogo</button>
+                <button id="lightMode" class="playButton">Modo claro</button>
+                <button id="help" onclick="location.href='#instructions'" class="playButton">?</button>
             </div>
+
         </header>
         
 
@@ -47,15 +43,30 @@
 
 <script src="script.js" defer></script>
 
+    <div class="instr-2" id="instructions">
+  <h2>Como jogar? </h2>
+  <p>
+    Preencha todas as células do tabuleiro de forma que cada linha, coluna e região contenha todos os Pokémon sem repetir nenhum.
+  </p>
+
+    <p> ☆ Clique em uma célula para digitar o número correspondente ao Pokémon;</p>
+    <p> ☆ Evite repetir o mesmo Pokémon na mesma linha, coluna ou região;</p>
+    <p> ☆ Complete o tabuleiro para finalizar o jogo.</p>
+  <p>
+    Se você não conhece as regras do Sudoku, veja este guia oficial: 
+    <a href="https://sudoku.com/sudoku-rules/" target="_blank">Guia Oficial de Sudoku</a>
+  </p>
+</section>
+
 <footer>
     <p> Sudoku-sudowoodo | Desenvolvido por <a href="https://github.com/renataalvescunh" target="_blank"
             rel="noopener noreferrer"> Renata </a> <br>
      Imagens dos Pokémon por <a href="https://msikma.github.io/pokesprite/index.html" target="_blank"
             rel="noopener noreferrer"> PokéSprite 
     </a> <br>
-
     </p>
-</footer>
 
+</footer>
+<audio id="clickSound" src="assets/sounds/button-ui-sound-effect-395762.mp3"></audio>
 </body>
 </html>
