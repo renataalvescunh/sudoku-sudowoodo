@@ -302,12 +302,14 @@ newGame(); // já inicia com puzzle novo ao carregar
 
 // =================== TEMA CLARO/ESCURO ===================
 const lightModeBtn = document.getElementById('lightMode');
-lightModeBtn.addEventListener('click', () => {
-    document.body.classList.toggle('light-mode');
-    lightModeBtn.textContent = document.body.classList.contains('light-mode') ? 'Modo escuro' : 'Modo claro';
-});
-lightModeBtn.textContent = 'Modo claro'; // estado inicial
 
+lightModeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    // Se conter 'dark-mode', o próximo clique deve mudar para o claro
+    lightModeBtn.textContent = document.body.classList.contains('dark-mode') ? 'Modo claro' : 'Modo escuro';
+});
+
+lightModeBtn.textContent = 'Modo escuro'; // Estado inicial (já que começa no claro)
 
 
 // =================== SOM DE CLIQUE NOS BOTÕES ===================
@@ -320,6 +322,5 @@ buttons.forEach(button => {
         sound.play();
     });
 });
-
 
 
